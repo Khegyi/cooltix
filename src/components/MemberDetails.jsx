@@ -3,21 +3,6 @@ import { createUseStyles } from "react-jss";
 
 
 const useStyles = createUseStyles({
-    myButton: {
-      color: 'green',
-     // color: ({ themes }) => theme.color,
-      margin: {
-        // jss-plugin-expand gives more readable syntax
-        top: 5, // jss-plugin-default-unit makes this 5px
-        right: 0,
-        bottom: 0,
-        left: '1rem'
-      },
-      '& span': {
-        // jss-plugin-nested applies this to a child span
-        fontWeight: 'bold' // jss-plugin-camel-case turns this into 'font-weight'
-      }
-    },
     myLabel: {
       fontStyle: 'italic'
     }
@@ -32,7 +17,7 @@ const MemberDetails = ( props ) => {
     const fakePics = () => {
       let picElements = [];
       for (let i = 0; i < 10; i++) {
-        picElements.push(<img src={`https://source.unsplash.com/random/95x95?sig=`+i} />);
+        picElements.push(<img key={i} src={`https://source.unsplash.com/random/95x95?sig=`+i} />);
       }
       return picElements;
     }
@@ -75,7 +60,7 @@ const MemberDetails = ( props ) => {
                 <h3>Pictures</h3>
                 <a href="#">See all</a>
               </div>
-              <div class="picture_list">
+              <div className="picture_list">
                 {
                   fakePics()
                 }
@@ -86,8 +71,8 @@ const MemberDetails = ( props ) => {
                 <h3>Pictures</h3>
                 <a href="#">See all</a>
               </div>
-              <ul class="purchases_list">
-                <li className="purchase_item">
+              <ul className="purchases_list">
+                <li key="546" className="purchase_item">
                   <div className="purchase_quantity">1x</div>
                   <div className="purchase_type"> Movie Ticket</div>
                   <div className="purchase_merchant">CinemaPlex Houston</div>
@@ -101,7 +86,7 @@ const MemberDetails = ( props ) => {
                     <div className="purchase_description">No Data</div>
                   </div>
                 </li>
-                <li className="purchase_item">
+                <li key="544" className="purchase_item">
                   <div className="purchase_quantity">1x</div>
                   <div className="purchase_type"> Movie Ticket</div>
                   <div className="purchase_merchant">CinemaPlex Houston</div>
@@ -115,7 +100,7 @@ const MemberDetails = ( props ) => {
                     <div className="purchase_description">No Data</div>
                   </div>
                 </li>
-                <li className="purchase_item">
+                <li key="543" className="purchase_item">
                   <div className="purchase_quantity">1x</div>
                   <div className="purchase_type"> Movie Ticket</div>
                   <div className="purchase_merchant">CinemaPlex Houston</div>

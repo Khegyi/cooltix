@@ -3,24 +3,47 @@ import { createUseStyles } from "react-jss";
 
 
 const useStyles = createUseStyles({
-    myButton: {
-      color: 'green',
-     // color: ({ themes }) => theme.color,
-      margin: {
-        // jss-plugin-expand gives more readable syntax
-        top: 5, // jss-plugin-default-unit makes this 5px
-        right: 0,
-        bottom: 0,
-        left: '1rem'
-      },
-      '& span': {
-        // jss-plugin-nested applies this to a child span
-        fontWeight: 'bold' // jss-plugin-camel-case turns this into 'font-weight'
+    header: {
+      backgroundColor: '#f5f5f5',
+      height:'96px',
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    logo: {
+      flex: 1,
+      display:'flex',
+      alignItems:'center',
+      '& img':{
+          marginLeft: '25px',
       }
     },
-    myLabel: {
-      fontStyle: 'italic'
-    }
+    searchBar: {
+      flex: 'auto',
+      display:'flex',
+      justifyContent: 'flex-end',
+      alignItems:'center',
+      '& input':{
+          height:'47px',
+          borderRadius: '25px',
+          border:'1px solid #b0b0b0',
+          textAlign:'center',
+      },
+    },
+    userMenu: {
+      flex: 1,
+      display:'flex',
+      justifyContent: 'flex-end',
+      alignItems:'center',
+      marginRight: '25px',
+      '& .user_greating':{
+          marginRight: '15px',
+      },
+      '& .user_avatar':{
+        borderRadius: '30px',
+        border:'3px solid #00A4FF',
+        height: '50px',
+      },
+    },
   })
 
 
@@ -36,19 +59,19 @@ const Header = ( props ) => {
       }, []);
 
     return (
-        <div className="header">
-            <div className="header_logo">
-                <img src="/logo.svg"  alt="cooltix logo" />
+        <div className={classes.header}>
+            <div className={classes.logo}>
+                <img height="48" src="/logo.svg"  alt="cooltix logo" />
             </div>
 
-            <div className="search_bar">
+            <div className={classes.searchBar}>
                 <input type="text" placeholder="Search" />
-                
+        
             </div>
-            <div className="user_menu">
-                <div className={classes.myButton}>Yellow, Rose</div>
+            <div className={classes.userMenu}>
+                <div className="user_greating">Yellow, Rose</div>
                 <div className="user_avatar">
-                    <img src="/default_user.svg" alt="default user avatar" />
+                    <img height="50" src="/default_user.svg" alt="default user avatar" />
                 </div>
             </div>
         </div>
