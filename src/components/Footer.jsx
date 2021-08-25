@@ -8,14 +8,15 @@ const useStyles = createUseStyles({
       display: 'flex',
       justifyContent: 'center',
       flexDirection: 'row',
+      fontFamily: 'Quicksand',
       '& .footer_wrap': {
-          width: '500px',
+          width: '600px',
         display: 'flex',
         flexDirection: 'row', 
       },
     },
     footerLogo: {
-      flex: 1,
+      flex: 2,
       display:'flex',
       alignItems:'center',
       '& img':{
@@ -36,9 +37,9 @@ const useStyles = createUseStyles({
       },
     },
     socialMedia: {
-      flex: 1,
+      flex: 2,
       display:'flex',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       alignItems:'center',
       marginRight: '25px',
       '& .sm_icon':{

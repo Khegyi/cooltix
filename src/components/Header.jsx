@@ -7,7 +7,12 @@ const useStyles = createUseStyles({
       backgroundColor: '#f5f5f5',
       height:'96px',
       display: 'flex',
+      position: 'fixed',
+      top:'0',
+      width: '100%',
       flexDirection: 'row',
+      fontFamily: 'Quicksand',
+      borderBottom:'1px solid #b0b0b0',
     },
     logo: {
       flex: 1,
@@ -18,7 +23,7 @@ const useStyles = createUseStyles({
       }
     },
     searchBar: {
-      flex: 'auto',
+      flex: '6',
       display:'flex',
       justifyContent: 'flex-end',
       alignItems:'center',
@@ -27,6 +32,10 @@ const useStyles = createUseStyles({
           borderRadius: '25px',
           border:'1px solid #b0b0b0',
           textAlign:'center',
+          fontFamily: 'Quicksand',
+          '&:focus': {
+            outline: 'none',
+          },
       },
     },
     userMenu: {
@@ -37,6 +46,7 @@ const useStyles = createUseStyles({
       marginRight: '25px',
       '& .user_greating':{
           marginRight: '15px',
+          fontWeight: '700',
       },
       '& .user_avatar':{
         borderRadius: '30px',
