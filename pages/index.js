@@ -23,8 +23,8 @@ export default function App() {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand"/>
       </Head>
       <Header/>
-      {/* <Main/> */}
-      <MemberDetails/>
+      <Main/>
+      {/* <MemberDetails/> */}
       <Footer/>
     </div>
   )

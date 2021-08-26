@@ -7,7 +7,7 @@ const mainBlue = "#00A4FF";
 
 const useStyles = createUseStyles({
    member:{
-     width: '1134px',
+     width: '1136px',
      margin: '126px auto 0',
      fontFamily: 'Quicksand',
    },
