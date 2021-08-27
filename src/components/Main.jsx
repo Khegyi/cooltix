@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
+import Link from 'next/link'
 import { createUseStyles } from "react-jss";
 import _ from 'underscore';
 import {
@@ -253,12 +254,14 @@ const Main = ( props ) => {
               {(list.length != 0 ?
                   list.map((member, i) => {
                     return (
-                      <div key={i} onClick={() =>getMemberId(member.id)} className={classes.resultMember}>
-                        <img height="85" src={member.profilePictureUrl} alt="user avatar" />
-                        <p className="member_name">{member.firstName} {member.lastName}</p>
-                        <p className="member_address_state">{member.address.state}, {member.address.postalCode}</p>
-                        <p className="member_address_street">{member.address.addressLine}, {member.address.city}</p>
-                      </div>
+                      <Link href={`/member/${member.id}`}>
+                        <a key={i} onClick={() =>getMemberId(member.id)} className={classes.resultMember}>
+                          <img height="85" src={member.profilePictureUrl} alt="user avatar" />
+                          <p className="member_name">{member.firstName} {member.lastName}</p>
+                          <p className="member_address_state">{member.address.state}, {member.address.postalCode}</p>
+                          <p className="member_address_street">{member.address.addressLine}, {member.address.city}</p>
+                        </a>
+                      </Link>
                       )
                     } 
                   )

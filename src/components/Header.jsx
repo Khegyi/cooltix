@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link'
 import { createUseStyles } from "react-jss";
 
 
@@ -58,7 +59,7 @@ const useStyles = createUseStyles({
 
 
 const Header = ( props ) => {
-  
+
     const [options, setoptions] = useState([]);
     const classes = useStyles();
 
@@ -67,20 +68,24 @@ const Header = ( props ) => {
 
     return (
         <div className={classes.header}>
-{            <div className={classes.headerLogo}>
+          <div className={classes.headerLogo}>
+            <Link href="/">
+              <a>
                 <img height="48" src="/logo.svg"  alt="cooltix logo" />
-            </div>}
-            <div className={classes.searchBar}>
-                <input type="text" placeholder="Search" />
-        
-            </div>
-            <div className={classes.userMenu}>
-                <div className="user_greating">Yellow, Rose</div>
-                <div className="user_avatar">
-                    <img height="50" src="/default_user.svg" alt="default user avatar" />
-                </div>
-            </div>
-        </div>
+              </a>
+            </Link>
+          </div>
+          <div className={classes.searchBar}>
+              <input type="text" placeholder="Search" />
+      
+          </div>
+          <div className={classes.userMenu}>
+              <div className="user_greating">Yellow, Rose</div>
+              <div className="user_avatar">
+                  <img height="50" src="/default_user.svg" alt="default user avatar" />
+              </div>
+          </div>
+      </div>
     )
 };   
  export default Header;
