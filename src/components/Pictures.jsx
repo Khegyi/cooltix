@@ -32,6 +32,10 @@ const useStyles = createUseStyles({
     marginTop: '10px',
     '& img':{
       marginTop:'8px',
+      '&:hover':{
+        filter: 'brightness(75%)',
+        cursor: 'pointer',
+      }
     }
   },
 })

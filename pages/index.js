@@ -1,57 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Head from 'next/head'
-import Header from '../src/components/Header';
 import Main from '../src/components/Main';
-import MemberDetails from '../src/components/MemberDetails';
-import Footer from '../src/components/Footer';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql
-} from "@apollo/client";
 
 
 import { createUseStyles } from "react-jss";
 
-  const client = new ApolloClient({
-    uri: 'https://cooltix-frontend-challenge.herokuapp.com',
-    cache: new InMemoryCache()
-  });
 
-
-
-
-export default function App() {
+export default function Home() {
 
   const [members, setMembers] = useState([]);
 
-
-
   useEffect(() => {
-
-    
        }, []);
 
   return (
-    <ApolloProvider client={client}>
       <div className="container">
-        <style jsx global>{`
-          body {
-            margin: 0;
-          }
-        `}</style>
-        <Head>
-          <title>Cooltix Challange</title>
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand"/>
-        </Head>
-        <Header/>
-        <Main reqmembers={members} />
-        {/* <MemberDetails/> */}
-        <Footer/>
+        <Main/>
       </div>
-    </ApolloProvider>
   )
 }

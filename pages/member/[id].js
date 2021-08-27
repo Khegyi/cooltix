@@ -18,7 +18,7 @@ const useStyles = createUseStyles({
    member:{
      width: '1136px',
      margin: '126px auto 0',
-     fontFamily: 'Quicksand',
+     fontFamily: 'QuickSand Book',
    },
     memberAvatar: {
       display:'flex',
@@ -29,7 +29,7 @@ const useStyles = createUseStyles({
         textAlign: 'center',
         fontSize: '24px',
         lineHeight: '28px',
-        fontWeight: '700',
+        fontFamily: 'QuickSand Bold',
       },
       '& img':{
           borderRadius: '75px'
@@ -46,7 +46,7 @@ const useStyles = createUseStyles({
       '& h3':{
         margin: '0',
         color: '#00A4FF',
-
+        fontFamily: 'QuickSand Bold',
       },
     },
     memberButtons:{
@@ -87,15 +87,21 @@ const useStyles = createUseStyles({
       marginTop: '5px',
       fontSize: '16px',
       lineHeight:'28px',
-      fontWeight: '700',
+      fontFamily: 'QuickSand Book',
     },
     detailLabel:{
       color: '#7b7b7b',
+      
     },
     detailData:{
       color: '#000',
       marginTop: '5px',
       marginLeft: '15px',
+      fontFamily: 'QuickSand Book',
+      fontWeight: '700',
+    },
+    detailLabelAddress:{
+      flex: '2',
     },
     memberSlots:{
       display: 'flex',
@@ -230,7 +236,7 @@ const MemberDetails = ( {member} ) => {
                     <div className={classes.detailLabel}>City:</div>
                     <div className={classes.detailData}>{member.address.city}</div>
                   </div>
-                  <div className={classes.detail}>
+                  <div className={`${classes.detail} ${classes.detailLabelAddress}`}>
                     <div className={classes.detailLabel}>Address Line:</div>
                     <div className={classes.detailData}>{member.address.addressLine}</div>
                   </div>

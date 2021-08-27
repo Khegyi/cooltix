@@ -39,6 +39,7 @@ const useStyles = createUseStyles({
     marginBottom: '5px',
     '&:hover':{
       backgroundColor: '#f5f5f5',
+      cursor: 'pointer',
     }
   },
   purchaseDetail:{

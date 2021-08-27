@@ -10,6 +10,8 @@ import {
   gql
 } from "@apollo/client";
 import MemberList from './MemberList';
+
+
   const client = new ApolloClient({
     uri: 'https://cooltix-frontend-challenge.herokuapp.com',
     cache: new InMemoryCache()
@@ -22,11 +24,11 @@ const useStyles = createUseStyles({
   main: {
     width: '1136px',
     margin: '126px auto 50px',
-    fontFamily: 'Quicksand',
+    fontFamily: 'QuickSand Book',
     '& h2':{
       fontSize: '24px',
       lineHeight: '28px',
-      fontWeight: '700',
+      fontFamily: 'QuickSand Bold',
      },
     },
     members:{
@@ -37,22 +39,31 @@ const useStyles = createUseStyles({
       flex: '3',
       border: '1px solid #e5e5e5',
       borderRadius: '4px',
-      padding: '24px 27px',
+      padding: '24px 27px 24px 27px',
       marginRight: '16px',
+    },
+    resultFilterHeader:{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '16px',
       '& h3':{
         fontSize: '20px',
         lineHeight: '24px',
-        fontWeight: '700',
-        marginTop: '0',
+        color: '#00A4FF',
+        fontFamily: 'QuickSand Bold',
+        margin: '0',
+      },
+      '& .check_all:hover':{
+        color: '#00A4FF',
+        cursor: 'pointer',
       },
     },
     filterCheckboxes:{
       display: 'flex',
       flexDirection: 'column',
-      '& .check_all:hover':{
-        color: '#00A4FF',
-        cursor: 'pointer',
-      },
+      maxHeight: '574px',
+      overflowY: 'auto',
     },
     filterCheckbox:{
       marginBottom: '8px',
@@ -67,20 +78,41 @@ const useStyles = createUseStyles({
     },
     resultListing:{
       flex: '9',
- 
     },
     resultInfoBar:{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       border: '1px solid #e5e5e5',
       borderRadius: '4px',
       marginBottom: '16px',
+      marginRight: '10px',
       padding: '0 16px',
+
+    },
+    resultCounter:{
+
+    },
+    resultOrder:{
+      fontFamily: 'QuickSand Book',
+      fontSize:'14px',
+     height: 'auto',
+      padding: '5px',
+      borderRadius: '4px',
+      border: 'none',
+ 
+      '&:focus': {
+        outline: '1px solid #e5e5e5',
+      },
     },
     resultMemberList:{
       display: 'flex',
-      justifyContent: 'space-between',
+  /*     justifyContent: 'space-between', */
       borderRadius: '4px',
       flexWrap: 'wrap',
-      width: '848px',
+      width: '865px',
+      maxHeight: '600px',
+      overflowY: 'auto',
     },
     resultMember:{
       flex: '1',
@@ -95,6 +127,12 @@ const useStyles = createUseStyles({
       minHeight: '210px',
       maxWidth: '192px',
       marginBottom: '16px',
+      marginRight: '16px',
+      textDecoration: 'none',
+      color: '#222D39',
+      '&:nth-child(3n+0)': {
+        marginRight: '0',
+      },
       '& img': {
         borderRadius:'42px',
       },
@@ -105,7 +143,7 @@ const useStyles = createUseStyles({
         cursor: 'pointer',
       },
       '& .member_name': {
-        fontWeight: '700',
+        fontFamily: 'QuickSand Bold',
         margin: '12px 0 0',
         fontSize: '20px',
         lineHeight: '26px',
@@ -157,7 +195,7 @@ const Main = ( props ) => {
      list = members;
     }
 
-     async function MembersReq() {
+  async function MembersReq() {
       const { data } = await client.query({
         query: gql`
           query Members {
@@ -224,7 +262,10 @@ const Main = ( props ) => {
 
             <div className={classes.members}>
               <div className={classes.resultFilter}>
-                <h3>States</h3>
+                <div className={classes.resultFilterHeader}>
+                  <h3>States</h3>
+                  <div onClick={clearFilter} className="check_all">All</div>
+                </div>
                 <div className={classes.filterCheckboxes}>
                  {  (states.length != 0 ?
                         states.map((state, x) => {
@@ -239,22 +280,24 @@ const Main = ( props ) => {
                         )
                      : "" )
                   }
-                  <div onClick={clearFilter} className="check_all">All</div>
+                  
                 </div>
               </div>
               <div className={classes.resultListing}>
                 <div className={classes.resultInfoBar}>
-                  <div className="result_counter"><p>Showing {(filteredMembers.length === 0 ? members.length : filteredMembers.length )} of {members.length} items</p></div>
-                  <div className="result_order">
- 
-                  </div>
+                  <div className={classes.resultCounter}><p>Showing {(filteredMembers.length === 0 ? members.length : filteredMembers.length )} of {members.length} items</p></div>
+                  <select className={classes.resultOrder} >
+                    <option value="firstName">First Name</option>
+                    <option value="lastName">Last Name</option>
+                    <option value="state">State</option>
+                  </select>
                 </div>
                 <div className={classes.resultMemberList}>
               {/*    <MemberList/> */}
               {(list.length != 0 ?
                   list.map((member, i) => {
                     return (
-                      <Link href={`/member/${member.id}`}>
+                      <Link key={i} href={`/member/${member.id}`}>
                         <a key={i} onClick={() =>getMemberId(member.id)} className={classes.resultMember}>
                           <img height="85" src={member.profilePictureUrl} alt="user avatar" />
                           <p className="member_name">{member.firstName} {member.lastName}</p>

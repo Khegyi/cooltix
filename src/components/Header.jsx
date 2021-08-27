@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 
 
 const useStyles = createUseStyles({
-    header: {
+    hder: {
       backgroundColor: '#f5f5f5',
       height:'96px',
       display: 'flex',
@@ -12,10 +12,10 @@ const useStyles = createUseStyles({
       top:'0',
       width: '100%',
       flexDirection: 'row',
-      fontFamily: 'Quicksand',
+      fontFamily: 'Quicksand Book',
       borderBottom:'1px solid #b0b0b0',
     },
-    headerLogo: {
+    hderLogo: {
       flex: 1,
       display:'flex',
       alignItems:'center',
@@ -33,7 +33,7 @@ const useStyles = createUseStyles({
           borderRadius: '25px',
           border:'1px solid #b0b0b0',
           textAlign:'center',
-          fontFamily: 'Quicksand',
+          fontFamily: 'Quicksand Book',
           '&:focus': {
             outline: 'none',
           },
@@ -67,8 +67,8 @@ const Header = ( props ) => {
       }, []);
 
     return (
-        <div className={classes.header}>
-          <div className={classes.headerLogo}>
+        <div className={classes.hder}>
+          <div className={classes.hderLogo}>
             <Link href="/">
               <a>
                 <img height="48" src="/logo.svg"  alt="cooltix logo" />
@@ -80,7 +80,7 @@ const Header = ( props ) => {
       
           </div>
           <div className={classes.userMenu}>
-              <div className="user_greating">Yellow, Rose</div>
+              <div className="user_greating">Hello, Rose</div>
               <div className="user_avatar">
                   <img height="50" src="/default_user.svg" alt="default user avatar" />
               </div>
