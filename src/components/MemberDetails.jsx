@@ -3,7 +3,6 @@ import { createUseStyles } from "react-jss";
 import Pictures from './Pictures';
 import Purchases from './Purchases';
 
-const mainBlue = "#00A4FF";
 
 const useStyles = createUseStyles({
    member:{
@@ -104,13 +103,6 @@ const MemberDetails = ( props ) => {
 
     const classes = useStyles();
 
-    const fakePics = () => {
-      let picElements = [];
-      for (let i = 0; i < 10; i++) {
-        picElements.push(<img key={i} src={`https://source.unsplash.com/random/95x95?sig=`+i} />);
-      }
-      return picElements;
-    }
 
     useEffect(() => {
       }, []);

@@ -14,7 +14,7 @@ const useStyles = createUseStyles({
       fontFamily: 'Quicksand',
       borderBottom:'1px solid #b0b0b0',
     },
-    logo: {
+    headerLogo: {
       flex: 1,
       display:'flex',
       alignItems:'center',
@@ -58,22 +58,18 @@ const useStyles = createUseStyles({
 
 
 const Header = ( props ) => {
+  
     const [options, setoptions] = useState([]);
-
     const classes = useStyles();
-
-
-   
 
     useEffect(() => {
       }, []);
 
     return (
         <div className={classes.header}>
-            <div className={classes.logo}>
+{            <div className={classes.headerLogo}>
                 <img height="48" src="/logo.svg"  alt="cooltix logo" />
-            </div>
-
+            </div>}
             <div className={classes.searchBar}>
                 <input type="text" placeholder="Search" />
         
