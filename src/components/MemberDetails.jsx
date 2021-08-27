@@ -112,9 +112,7 @@ const useStyles = createUseStyles({
 
 const MemberDetails = ( props ) => {
     const [options, setoptions] = useState([]);
-
     const classes = useStyles();
-
 
     useEffect(() => {
       }, []);
