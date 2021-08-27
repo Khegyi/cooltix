@@ -5,8 +5,6 @@ import Purchases from '../../src/components/Purchases';
 import {
     ApolloClient,
     InMemoryCache,
-    ApolloProvider,
-    useQuery,
     gql
   } from "@apollo/client";
 
@@ -113,7 +111,6 @@ const useStyles = createUseStyles({
     },
   })
 
-
   export const getStaticPaths = async () => {
     const res = await client.query({
       query: gql`
@@ -133,85 +130,53 @@ const useStyles = createUseStyles({
       }
       `,
     });
-    console.log(res);
     const paths = res.data.allMembers.map(member => {
         return{
             params: {id: member.id.toString() }
             }
         }
     )
-    //console.log(paths);
     return{
       paths,
       fallback: false
     }
 }
-const GET_MEMBER = gql`
-    query Amember($id: String!) {
-        member(id: $id) {
-            id
-            firstName
-            lastName
-            address {
-            country
-            state
-            postalCode city
-            addressLine
-            }
-            profilePictureUrl 
-        }
-    }
-`;
 
+const GET_MEMBER = gql`query($memberId: ID!) {
+  member(id: $memberId) {
+    id
+    firstName
+    lastName
+    email
+    address {
+      country
+      state
+      postalCode city
+      addressLine
+    }
+    profilePictureUrl 
+  }
+}`; 
+
+console.log(GET_MEMBER);
 
   export const getStaticProps = async (context) => {
-      const ida = context.params.id;
-      console.log(ida);
-      const id = "350-07-6873";
-/*       const res = await client.query({
+    const id = context.params.id;
+     console.log(id);
+    const res = await client.query({
         query: GET_MEMBER,
-        variables: {
-            id: "350-07-6873"
-          }
-      }); */
-      //console.log(res)
+        variables: { memberId: id }
+      });
+      console.log(res)
       return{
-         // props: {member: res.data.member}
-         props: {member: ida}
+          props: {member: res.data.member}
       }
   }
-
-/*   function Repos(id){
-
-    const client = new ApolloClient({
-        uri: 'https://cooltix-frontend-challenge.herokuapp.com',
-        cache: new InMemoryCache()
-      });
-    const { loading, error, data } = useQuery(GET_MEMBER, {
-        variables: { id },
-        options: {
-            client: client,
-        },
-      });
-    
-      if (loading) return null;
-      if (error) return `Error! ${error}`;
-      
-      console.log(data)
-
-      return (
-        data.member.lastName
-      );
-  } */
 
 const MemberDetails = ( {member} ) => {
     const [options, setoptions] = useState([]);
 
     const classes = useStyles();
-
-  //  console.log(member);
-
-   // Repos(member);
 
     useEffect(() => {
       }, []);
@@ -235,43 +200,39 @@ const MemberDetails = ( {member} ) => {
                 <div className={classes.detailRow}>
                   <div className={classes.detail}>
                     <div className={classes.detailLabel}>First Name:</div>
-                    <div className={classes.detailData}>Rose</div>
+                    <div className={classes.detailData}>{member.firstName}</div>
                   </div>
                   <div className={classes.detail}>
                     <div className={classes.detailLabel}>Last Name:</div>
-                    <div className={classes.detailData}>Barnett</div>
+                    <div className={classes.detailData}>{member.lastName}</div>
                   </div>
                   <div className={classes.detail}>
                     <div className={classes.detailLabel}>Email:</div>
-                    <div className={classes.detailData}>rose.barmett@example.com</div>
+                    <div className={classes.detailData}>{member.email}</div>
                   </div>
                 </div>
                 <div className={classes.detailRow}>
                   <div className={classes.detail}>
-                    <div className={classes.detailLabel}>First Name:</div>
-                    <div className={classes.detailData}>Rose</div>
+                    <div className={classes.detailLabel}>Country:</div>
+                    <div className={classes.detailData}>{member.address.country}</div>
                   </div>
                   <div className={classes.detail}>
-                    <div className={classes.detailLabel}>Last Name:</div>
-                    <div className={classes.detailData}>Barnett</div>
+                    <div className={classes.detailLabel}>State:</div>
+                    <div className={classes.detailData}>{member.address.state}</div>
                   </div>
                   <div className={classes.detail}>
-                    <div className={classes.detailLabel}>Email:</div>
-                    <div className={classes.detailData}>rose.barmett@example.com</div>
+                    <div className={classes.detailLabel}>Postal Code:</div>
+                    <div className={classes.detailData}>{member.address.postalCode}</div>
                   </div>
                 </div>
                 <div className={classes.detailRow}>
                   <div className={classes.detail}>
-                    <div className={classes.detailLabel}>First Name:</div>
-                    <div className={classes.detailData}>Rose</div>
+                    <div className={classes.detailLabel}>City:</div>
+                    <div className={classes.detailData}>{member.address.city}</div>
                   </div>
                   <div className={classes.detail}>
-                    <div className={classes.detailLabel}>Last Name:</div>
-                    <div className={classes.detailData}>Barnett</div>
-                  </div>
-                  <div className={classes.detail}>
-                    <div className={classes.detailLabel}>Email:</div>
-                    <div className={classes.detailData}>rose.barmett@example.com</div>
+                    <div className={classes.detailLabel}>Address Line:</div>
+                    <div className={classes.detailData}>{member.address.addressLine}</div>
                   </div>
                 </div>
               </div>
