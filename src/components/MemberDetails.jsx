@@ -97,6 +97,18 @@ const useStyles = createUseStyles({
     },
   })
 
+  import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    useQuery,
+    gql
+  } from "@apollo/client";
+
+  const client = new ApolloClient({
+    uri: 'https://cooltix-frontend-challenge.herokuapp.com',
+    cache: new InMemoryCache()
+  });
 
 const MemberDetails = ( props ) => {
     const [options, setoptions] = useState([]);
