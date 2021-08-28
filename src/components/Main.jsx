@@ -11,14 +11,10 @@ import {
 } from "@apollo/client";
 import MemberList from './MemberList';
 
-
   const client = new ApolloClient({
     uri: 'https://cooltix-frontend-challenge.herokuapp.com',
     cache: new InMemoryCache()
   });
-
-
-
 
 const useStyles = createUseStyles({
   main: {
@@ -179,23 +175,17 @@ const useStyles = createUseStyles({
   })
 
 const Main = ( props ) => {
-
+    const [searchprops, setSearchProps] = useState(["firstName", "lastName"]);
     const [options, setoptions] = useState([]);
+    const [searchKey, setSearchKey] = useState("");
     const [filterStates, setFilterStates] = useState([]);
-    
+    const [resultOrder, setResultOrder] = useState("firstName");
     const [states, setStates] = useState([]);
     const [members, setMembers] = useState([]);
     const [filteredMembers, setFilteredMembers] = useState([]);
     const classes = useStyles();
 
-    let list;
-    if(filteredMembers.length != 0){
-     list = filteredMembers;
-    }else{
-     list = members;
-    }
-
-  async function MembersReq() {
+    async function MembersReq() {
       const { data } = await client.query({
         query: gql`
           query Members {
@@ -218,18 +208,65 @@ const Main = ( props ) => {
       const astates = _.uniq(data.allMembers, x => x.address.state).map((state) => {
         return state.address.state;
       });
-      setStates(astates);
+      setStates(astates.sort());
+  }
+
+    let list;
+    if(filteredMembers.length != 0){
+     list = filteredMembers;
+    }else{
+     list = members;
+    }
+
+     list = sortList(list);
+     list = searchMember(list, searchKey, searchprops); 
+
+  function sortList (resultlist){
+      const sortedList = [...resultlist];
+      sortedList.sort((a, b) => {
+        
+        let fa = a[resultOrder].toLowerCase(),
+            fb = b[resultOrder].toLowerCase();
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;
+    });
+    return sortedList;
+    }
+
+
+  function searchMember(arr, searchKey, props) {
+
+    return arr.filter(function(obj) {
+      return Object.keys(obj).some(function(key) {
+        if(props.includes(key)){
+            return obj[key].toLowerCase().includes(searchKey);
+        }
+      })
+    }); 
+  }
+
+  const handleSearch = (e) =>{
+    console.log(e.target.value)
+    const searchKey = e.target.value.trim().replace(/[^a-zA-Z ]/g, "").toLowerCase();
+    setSearchKey(searchKey);
+  }
+
+
+  function setOrder (e){
+    setResultOrder(e.target.value)
   }
 
   function clearFilter(){
     setFilteredMembers([]);
   }
-
-  function getMemberId(id){
-    console.log(id);
-  }
   
   function filterState(e){
+    //x.filter(obj=>obj.address.state === "Virginia");
     const tempList = filterStates;
     if(e.target.checked){
       tempList.push(e.target.defaultValue);
@@ -285,11 +322,11 @@ const Main = ( props ) => {
               </div>
               <div className={classes.resultListing}>
                 <div className={classes.resultInfoBar}>
-                  <div className={classes.resultCounter}><p>Showing {(filteredMembers.length === 0 ? members.length : filteredMembers.length )} of {members.length} items</p></div>
-                  <select className={classes.resultOrder} >
+                  <div className={classes.resultCounter}><p>Showing {list.length } of {members.length} items</p></div>
+                  <input type="text"  onChange={(e) =>handleSearch(e)} placeholder="Search" />
+                  <select onChange={(e) => setOrder(e)} className={classes.resultOrder} >
                     <option value="firstName">First Name</option>
                     <option value="lastName">Last Name</option>
-                    <option value="state">State</option>
                   </select>
                 </div>
                 <div className={classes.resultMemberList}>
@@ -298,7 +335,7 @@ const Main = ( props ) => {
                   list.map((member, i) => {
                     return (
                       <Link key={i} href={`/member/${member.id}`}>
-                        <a key={i} onClick={() =>getMemberId(member.id)} className={classes.resultMember}>
+                        <a key={i} className={classes.resultMember}>
                           <img height="85" src={member.profilePictureUrl} alt="user avatar" />
                           <p className="member_name">{member.firstName} {member.lastName}</p>
                           <p className="member_address_state">{member.address.state}, {member.address.postalCode}</p>
