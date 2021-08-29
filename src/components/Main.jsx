@@ -92,6 +92,7 @@ const useStyles = createUseStyles({
   resultCounter: {},
   searchBarHolder: {
     position: "relative",
+    zIndex: "-1",
   },
   searchBar: {
     height: "28px",
