@@ -45,8 +45,6 @@ const Header = ( props ) => {
 
     const [options, setoptions] = useState([]);
     const classes = useStyles();
-
-
     useEffect(() => {
       }, []);
 
@@ -67,5 +65,5 @@ const Header = ( props ) => {
           </div>
       </div>
     )
-};   
+};  
  export default Header;

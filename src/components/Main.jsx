@@ -15,9 +15,11 @@ import {
     cache: new InMemoryCache()
   });
 
+
+  
 const useStyles = createUseStyles({
   main: {
-    margin: '126px auto 50px',
+    margin: '20px auto 50px',
     fontFamily: 'QuickSand Book',
     '& h2':{
       fontSize: '24px',
@@ -184,6 +186,10 @@ const useStyles = createUseStyles({
         lineHeight: '16px',
       },
     },
+    nomatch:{
+      width: '100%',
+      textAlign: 'center',
+    },
     unloaded:{
       filter: 'blur(1px)',
     },
@@ -204,6 +210,8 @@ const useStyles = createUseStyles({
 const Main = ( props ) => {
     const [searchprops, setSearchProps] = useState(["firstName", "lastName"]);
     const [options, setoptions] = useState([]);
+    const [allChecked, setAllChecked] = useState(false);
+    
     const [searchKey, setSearchKey] = useState("");
     const [filterStates, setFilterStates] = useState([]);
     const [resultOrder, setResultOrder] = useState("firstName");
@@ -288,6 +296,11 @@ const Main = ( props ) => {
 
   function clearFilter(){
     setFilteredMembers([]);
+    Array.from(document.querySelectorAll("input.filterstate"))
+    .forEach((checkbox) => {
+      console.log(checkbox.id);
+     document.getElementById(checkbox.id).checked = false;
+    });
   }
 
   function filterState(e){
@@ -329,7 +342,7 @@ const Main = ( props ) => {
                         states.map((state, x) => {
                           return (
                             <label key={x} className={classes.filterCheckbox}>
-                            <input type="checkbox" onChange={e => filterState(e)} value={state} />
+                            <input type="checkbox" id={`chkbx-${x}`} className="filterstate" defaultChecked={allChecked} onChange={e => filterState(e)} value={state} />
                             {state}
                             <span className="checkmark"></span>
                             </label>
@@ -368,7 +381,7 @@ const Main = ( props ) => {
                       )
                     } 
                   )
-                    : "" )}
+                    : <div className={classes.nomatch}><h4 >No Match Found</h4></div>  )}
                 </div>
               </div>
             </div>

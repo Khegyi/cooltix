@@ -57,7 +57,7 @@ const useStyles = createUseStyles({
 const Footer = ( props ) => {
     const [options, setoptions] = useState([]);
     const classes = useStyles();
-
+    
     return (
         <div className={classes.footer}>
             <div className="footer_wrap">

@@ -18,7 +18,8 @@ body {
     background: #555; 
   }
   .container{
-    margin: auto;
+    margin: 126px auto 50px;
+    min-height: calc(100vh - 306px);
   }
 
   @media screen and (min-width: 665px) {
@@ -31,7 +32,7 @@ body {
     .container{
       width: 864px;
     }
-    
+
   }
 
 
