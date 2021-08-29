@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Main from '../src/components/Main';
+import React, { useEffect, useState } from "react";
+import Main from "../src/components/Main";
 
-import { createUseStyles } from "react-jss";
 
-const Home = ( props ) => {
+const Home = (props) => {
   const [members, setMembers] = useState([]);
 
-  useEffect(() => {
-       }, []);
+  useEffect(() => {}, []);
 
-  return (
-      <Main />
-  )
-}
- 
+  return <Main />;
+};
+
 export default Home;
