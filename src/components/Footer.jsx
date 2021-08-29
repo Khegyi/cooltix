@@ -8,7 +8,6 @@ const useStyles = createUseStyles({
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
-    fontFamily: "Quicksand Book",
     "& .footer_wrap": {
       width: "600px",
       display: "flex",

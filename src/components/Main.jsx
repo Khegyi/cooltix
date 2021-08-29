@@ -18,11 +18,10 @@ const client = new ApolloClient({
 const useStyles = createUseStyles({
   main: {
     margin: "20px auto 50px",
-    fontFamily: "QuickSand Book",
     "& h2": {
       fontSize: "24px",
       lineHeight: "28px",
-      fontFamily: "QuickSand Bold",
+      fontWeight: "700",
     },
   },
   members: {
@@ -45,7 +44,7 @@ const useStyles = createUseStyles({
       fontSize: "20px",
       lineHeight: "24px",
       color: "#00A4FF",
-      fontFamily: "QuickSand Bold",
+      fontWeight: "700",
       margin: "0",
     },
     "& .check_all:hover": {
@@ -99,7 +98,7 @@ const useStyles = createUseStyles({
     borderRadius: "25px",
     border: "1px solid #b0b0b0",
     textAlign: "center",
-    fontFamily: "Quicksand Book",
+
     "&:focus": {
       outline: "none",
     },
@@ -110,7 +109,6 @@ const useStyles = createUseStyles({
     top: "8px",
   },
   resultOrder: {
-    fontFamily: "QuickSand Book",
     fontSize: "14px",
     height: "auto",
     padding: "5px",
@@ -162,7 +160,7 @@ const useStyles = createUseStyles({
       cursor: "pointer",
     },
     "& .member_name": {
-      fontFamily: "QuickSand Bold",
+      fontWeight: "700",
       margin: "12px 0 0",
       fontSize: "20px",
       lineHeight: "26px",
@@ -300,6 +298,7 @@ const Main = (props) => {
       }
     );
   }
+
   function filterState(e) {
     const tempList = filterStates;
     if (e.target.checked) {

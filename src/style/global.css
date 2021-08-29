@@ -1,7 +1,6 @@
-@import url("http://fonts.cdnfonts.com/css/quicksand");
-
 body {
   margin: 0;
+  font-family: 'QuickSand';
 }
 ::-webkit-scrollbar {
   width: 8px;

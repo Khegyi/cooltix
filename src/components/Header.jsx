@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { createUseStyles } from "react-jss";
-
 const useStyles = createUseStyles({
   header: {
     backgroundColor: "#f5f5f5",
@@ -11,7 +10,6 @@ const useStyles = createUseStyles({
     top: "0",
     width: "100%",
     flexDirection: "row",
-    fontFamily: "Quicksand Book",
     borderBottom: "1px solid #b0b0b0",
   },
   headerLogo: {
@@ -22,6 +20,7 @@ const useStyles = createUseStyles({
       marginLeft: "25px",
     },
   },
+
   userMenu: {
     flex: 1,
     display: "flex",
@@ -30,7 +29,7 @@ const useStyles = createUseStyles({
     marginRight: "25px",
     "& .user_greating": {
       marginRight: "15px",
-      fontWeight: "700",
+      fontWeight:'700',
     },
     "& .user_avatar": {
       borderRadius: "30px",

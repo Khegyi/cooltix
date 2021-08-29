@@ -6,7 +6,6 @@ import Purchases from "./Purchases";
 const useStyles = createUseStyles({
   member: {
     margin: "126px auto 0",
-    fontFamily: "QuickSand Book",
   },
   memberAvatar: {
     display: "flex",
@@ -17,7 +16,7 @@ const useStyles = createUseStyles({
       textAlign: "center",
       fontSize: "24px",
       lineHeight: "28px",
-      fontFamily: "QuickSand Bold",
+      fontWeight:'700',
     },
     "& img": {
       borderRadius: "75px",
@@ -34,7 +33,7 @@ const useStyles = createUseStyles({
     "& h3": {
       margin: "0",
       color: "#00A4FF",
-      fontFamily: "QuickSand Bold",
+      fontWeight:'700',
     },
   },
   memberButtons: {
@@ -78,7 +77,6 @@ const useStyles = createUseStyles({
     marginTop: "5px",
     fontSize: "16px",
     lineHeight: "28px",
-    fontFamily: "QuickSand Book",
   },
   detailLabel: {
     color: "#7b7b7b",
@@ -87,7 +85,6 @@ const useStyles = createUseStyles({
     color: "#000",
     marginTop: "5px",
     marginLeft: "15px",
-    fontFamily: "QuickSand Book",
     fontWeight: "700",
   },
   detailLabelAddress: {
