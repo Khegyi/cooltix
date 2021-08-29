@@ -17,4 +17,28 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+  .container{
+    margin: auto;
+  }
+
+  @media screen and (min-width: 665px) {
+    .container{
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 868px) {
+    .container{
+      width: 864px;
+    }
+    
+  }
+
+
+@media screen and (min-width: 1280px) {
+  .container{
+    width: 1222px;
+  }
+}
+
   

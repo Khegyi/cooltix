@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link'
 import { createUseStyles } from "react-jss";
 import _ from 'underscore';
@@ -9,7 +9,6 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
-import MemberList from './MemberList';
 
   const client = new ApolloClient({
     uri: 'https://cooltix-frontend-challenge.herokuapp.com',
@@ -18,7 +17,6 @@ import MemberList from './MemberList';
 
 const useStyles = createUseStyles({
   main: {
-    width: '1136px',
     margin: '126px auto 50px',
     fontFamily: 'QuickSand Book',
     '& h2':{
@@ -74,9 +72,14 @@ const useStyles = createUseStyles({
     },
     resultListing:{
       flex: '9',
+      '@media (max-width: 868px)': {
+        flex: '6',
+      },
     },
     resultInfoBar:{
+
       display: 'flex',
+      flexWrap: 'wrap',
       justifyContent: 'space-between',
       alignItems: 'center',
       border: '1px solid #e5e5e5',
@@ -84,10 +87,31 @@ const useStyles = createUseStyles({
       marginBottom: '16px',
       marginRight: '10px',
       padding: '0 16px',
-
+      '@media (max-width: 868px)': {
+        flexDirection: 'column',
+      },
     },
     resultCounter:{
 
+    },
+    searchBarHolder:{
+      position: 'relative',
+     
+    },
+    searchBar:{
+      height:'28px',
+      borderRadius: '25px',
+      border:'1px solid #b0b0b0',
+      textAlign:'center',
+      fontFamily: 'Quicksand Book',
+      '&:focus': {
+        outline: 'none',
+      },
+    },
+    searchBarIcon:{
+      position: 'absolute',
+      left:'10px',
+      top: '8px'
     },
     resultOrder:{
       fontFamily: 'QuickSand Book',
@@ -103,12 +127,13 @@ const useStyles = createUseStyles({
     },
     resultMemberList:{
       display: 'flex',
-  /*     justifyContent: 'space-between', */
       borderRadius: '4px',
       flexWrap: 'wrap',
-      width: '865px',
       maxHeight: '600px',
       overflowY: 'auto',
+      '@media (max-width: 868px)': {
+        justifyContent: 'center',
+      },
     },
     resultMember:{
       flex: '1',
@@ -126,8 +151,10 @@ const useStyles = createUseStyles({
       marginRight: '16px',
       textDecoration: 'none',
       color: '#222D39',
-      '&:nth-child(3n+0)': {
-        marginRight: '0',
+      '@media (min-width: 1280px)': {
+        '&:nth-child(3n+0)': {
+          marginRight: '0',
+        },
       },
       '& img': {
         borderRadius:'42px',
@@ -251,11 +278,9 @@ const Main = ( props ) => {
   }
 
   const handleSearch = (e) =>{
-    console.log(e.target.value)
     const searchKey = e.target.value.trim().replace(/[^a-zA-Z ]/g, "").toLowerCase();
     setSearchKey(searchKey);
   }
-
 
   function setOrder (e){
     setResultOrder(e.target.value)
@@ -264,9 +289,8 @@ const Main = ( props ) => {
   function clearFilter(){
     setFilteredMembers([]);
   }
-  
+
   function filterState(e){
-    //x.filter(obj=>obj.address.state === "Virginia");
     const tempList = filterStates;
     if(e.target.checked){
       tempList.push(e.target.defaultValue);
@@ -276,11 +300,9 @@ const Main = ( props ) => {
         tempList.splice(index, 1);
       }
     }
-    console.log(tempList);
+    setFilterStates(tempList);
     const res = members.filter((mem) => {
-      
       return  tempList.includes(mem.address.state);
-
     })
     setFilteredMembers(res);
   }
@@ -296,7 +318,6 @@ const Main = ( props ) => {
             <div className="main_title">
                 <h2>Members</h2>
             </div>
-
             <div className={classes.members}>
               <div className={classes.resultFilter}>
                 <div className={classes.resultFilterHeader}>
@@ -317,13 +338,15 @@ const Main = ( props ) => {
                         )
                      : "" )
                   }
-                  
                 </div>
               </div>
               <div className={classes.resultListing}>
                 <div className={classes.resultInfoBar}>
                   <div className={classes.resultCounter}><p>Showing {list.length } of {members.length} items</p></div>
-                  <input type="text"  onChange={(e) =>handleSearch(e)} placeholder="Search" />
+                  <div className={classes.searchBarHolder} >
+                    <input type="text" className={classes.searchBar}  onChange={(e) =>handleSearch(e)} placeholder="Search" />
+                    <img height="18px" className={classes.searchBarIcon} src="/search_icon.svg" alt="search" />
+                  </div>
                   <select onChange={(e) => setOrder(e)} className={classes.resultOrder} >
                     <option value="firstName">First Name</option>
                     <option value="lastName">Last Name</option>

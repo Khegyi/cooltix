@@ -2,12 +2,13 @@ import '../src/style/global.css';
 import Layout from '../src/components/Layout';
 
 
-function MyApp ({Component, pageProps}) {
+const App = ({Component, pageProps}) => {
+
     return (
-            <Layout>
-                <Component {...pageProps}/>
-            </Layout>
+        <Layout>
+            <Component {...pageProps}/>
+        </Layout>
     )
 }
 
-export default MyApp
+export default App

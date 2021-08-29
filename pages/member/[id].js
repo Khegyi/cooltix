@@ -16,7 +16,6 @@ import {
 
 const useStyles = createUseStyles({
    member:{
-     width: '1136px',
      margin: '126px auto 0',
      fontFamily: 'QuickSand Book',
    },
@@ -80,6 +79,9 @@ const useStyles = createUseStyles({
     },
     detailRow:{
       display: 'flex',
+      '@media (max-width: 665px)': {
+        flexDirection: 'column',
+      },
     },
     detail:{
       flex: '1',
@@ -164,16 +166,13 @@ const GET_MEMBER = gql`query($memberId: ID!) {
   }
 }`; 
 
-console.log(GET_MEMBER);
 
   export const getStaticProps = async (context) => {
     const id = context.params.id;
-     console.log(id);
     const res = await client.query({
         query: GET_MEMBER,
         variables: { memberId: id }
       });
-      console.log(res)
       return{
           props: {member: res.data.member}
       }
@@ -181,7 +180,6 @@ console.log(GET_MEMBER);
 
 const MemberDetails = ( {member} ) => {
     const [options, setoptions] = useState([]);
-
     const classes = useStyles();
 
     useEffect(() => {

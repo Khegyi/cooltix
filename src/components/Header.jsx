@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 
 
 const useStyles = createUseStyles({
-    hder: {
+    header: {
       backgroundColor: '#f5f5f5',
       height:'96px',
       display: 'flex',
@@ -15,29 +15,13 @@ const useStyles = createUseStyles({
       fontFamily: 'Quicksand Book',
       borderBottom:'1px solid #b0b0b0',
     },
-    hderLogo: {
+    headerLogo: {
       flex: 1,
       display:'flex',
       alignItems:'center',
       '& img':{
           marginLeft: '25px',
       }
-    },
-    searchBar: {
-      flex: '6',
-      display:'flex',
-      justifyContent: 'flex-end',
-      alignItems:'center',
-      '& input':{
-          height:'47px',
-          borderRadius: '25px',
-          border:'1px solid #b0b0b0',
-          textAlign:'center',
-          fontFamily: 'Quicksand Book',
-          '&:focus': {
-            outline: 'none',
-          },
-      },
     },
     userMenu: {
       flex: 1,
@@ -57,27 +41,23 @@ const useStyles = createUseStyles({
     },
   })
 
-
 const Header = ( props ) => {
 
     const [options, setoptions] = useState([]);
     const classes = useStyles();
 
+
     useEffect(() => {
       }, []);
 
     return (
-        <div className={classes.hder}>
-          <div className={classes.hderLogo}>
+        <div className={classes.header}>
+          <div className={classes.headerLogo}>
             <Link href="/">
               <a>
                 <img height="48" src="/logo.svg"  alt="cooltix logo" />
               </a>
             </Link>
-          </div>
-          <div className={classes.searchBar}>
-              <input type="text" placeholder="Search" />
-      
           </div>
           <div className={classes.userMenu}>
               <div className="user_greating">Hello, Rose</div>

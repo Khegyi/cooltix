@@ -57,8 +57,6 @@ const useStyles = createUseStyles({
 const Footer = ( props ) => {
     const [options, setoptions] = useState([]);
     const classes = useStyles();
-    useEffect(() => {
-      }, []);
 
     return (
         <div className={classes.footer}>

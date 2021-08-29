@@ -11,7 +11,6 @@ import {
   gql
 } from "@apollo/client";
 
-
 import { createUseStyles } from "react-jss";
 import Main from '../../src/components/Main';
 
