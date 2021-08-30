@@ -11,6 +11,7 @@ const useStyles = createUseStyles({
     width: "100%",
     flexDirection: "row",
     borderBottom: "1px solid #b0b0b0",
+    zIndex: '99',
   },
   headerLogo: {
     flex: 1,
