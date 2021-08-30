@@ -123,6 +123,7 @@ const useStyles = createUseStyles({
   resultMemberList: {
     display: "flex",
     borderRadius: "4px",
+    position: "relative",
     flexWrap: "wrap",
     maxHeight: "600px",
     overflowY: "auto",
@@ -185,6 +186,11 @@ const useStyles = createUseStyles({
   },
   unloaded: {
     filter: "blur(1px)",
+    "&:hover": {
+      cursor: "default",
+      backgroundColor: "unset",
+      borderColor: "#e5e5e5",
+    },
   },
   unloadedBar: {
     width: "176px",
@@ -197,6 +203,11 @@ const useStyles = createUseStyles({
     height: "12px",
     borderRadius: "32px",
     backgroundColor: "#d8d8d8",
+  },
+  loadingScreen: {
+    position: "absolute",
+    top: "32%",
+    left: "50%",
   },
 });
 
@@ -316,6 +327,22 @@ const Main = (props) => {
     });
     setFilteredMembers(res);
   }
+
+  const DummyPlates = (sum) => {
+    let store = [];
+    for (let z = 0; z < sum; z++) {
+      store.push(
+        <a key={z} className={`${classes.resultMember} ${classes.unloaded}`}>
+          <img height="85" src="/default_user.svg" alt="user avatar" />
+          <div className={classes.unloadedBar}></div>
+          <div className={classes.unloadedBarSmall}></div>
+          <div className={classes.unloadedBarSmall}></div>
+        </a>
+      );
+    }
+    return store;
+  };
+
   useEffect(() => {
     if (members.length === 0) {
       MembersReq();
@@ -415,9 +442,14 @@ const Main = (props) => {
                 </div>
               )
             ) : (
-              <div className={classes.nomatch}>
-                <h4>Loading...</h4>
-              </div>
+              <>
+                {DummyPlates(6)}
+                <div className={classes.loadingScreen}>
+                  <div className="loader">
+                    <h4>Loading...</h4>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>
